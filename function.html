@@ -147,16 +147,7 @@
 		</div>
 
 		<div class="ms-section five">
-            <h1><a href="#" id="project">Projects</a></h1>
-            <div class="pro">
-                <a href="./calculator.html">calculator</a>
-                <a href="./math-game.html">math-game</a>
-                <a href="./daalgawar5.html">rock paper</a>
-                <a href="./function.html">palindrome</a>
-                <a href="./gif-searcher.html">gif searcher</a>
-                <a href="./random.html">random gif</a>
-                <button onclick="cancel()">X</button>
-            </div>
+            <h1><a href="#" id="project">Palindrome</a></h1>
 		</div>
 
 		<div class="ms-section six">
@@ -168,13 +159,40 @@
 	</div>
 </div>
 <script>
-    var project = document.getElementById('project')
-    project.onclick = function(){ 
-        document.querySelector('.pro').style.opacity = '1'
+       function anhnii(n){
+    for (var i = 1; i <= n; i++) { 
+    var s = 0;
+    for (var j = 1; j <= i; j++) {
+        if ((i % j) == 0) {
+             s++;
+     }}
+    if (s == 2){console.log('anhnii too ' + i)};
     }
-    function cancel(){
-        document.querySelector('.pro').style.opacity= '-1'
+}
+anhnii(100)
+function palindrome(n){
+    var s,final = 0
+    var t = n
+    while(n > 0){
+        s = n % 10
+        n = parseInt(n/10)
+        final = final * 10 + s
     }
+    if(final == t){
+        alert('palindrome')
+    }else{
+        alert('not palindrome')
+    }
+}
+palindrome(prompt('too oruulnuu'))
+function gurawt(n,s){
+    for(var i = n;i <= s;i++){
+        if(i % 3 == 0){
+            console.log(i)
+        }
+    }
+}
+gurawt(1,100)
 </script>
 </body>
 </html>

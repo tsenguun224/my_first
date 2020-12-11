@@ -72,18 +72,9 @@
 .five .pro {
     width: 400px;
     height: 370px;
-    background-color:rgb(12, 218, 39);
-    opacity:-1;
-    border: 1px solid white;
+    box-shadow: inset;
     position: relative;
     transition: .3s;
-}
-.five button {
-    width: 100px;
-    font-size: 25px;
-    position:absolute;
-    bottom: 10%;
-    left: 36%;
 }
 .five .pro a {
     padding: 0;
@@ -147,15 +138,15 @@
 		</div>
 
 		<div class="ms-section five">
-            <h1><a href="#" id="project">Projects</a></h1>
+            <h1><a href="#" id="project">Rock paper scissors</a></h1>
             <div class="pro">
-                <a href="./calculator.html">calculator</a>
-                <a href="./math-game.html">math-game</a>
-                <a href="./daalgawar5.html">rock paper</a>
-                <a href="./function.html">palindrome</a>
-                <a href="./gif-searcher.html">gif searcher</a>
-                <a href="./random.html">random gif</a>
-                <button onclick="cancel()">X</button>
+                <button id="rock">Rock</button>
+                <button id="paper">Paper</button>
+                <button id="scissors">Scissor</button>
+                <div>CPU WIN: <p class="ts1">0</p></div>
+                <div>YOUR WIN: <p class="ts2">0</p></div>
+                <div>DRAW: <p class="ts3">0</p></div>
+                <div class="disp"></div>
             </div>
 		</div>
 
@@ -168,13 +159,72 @@
 	</div>
 </div>
 <script>
-    var project = document.getElementById('project')
-    project.onclick = function(){ 
-        document.querySelector('.pro').style.opacity = '1'
+document.getElementById('rock').onclick = user;
+document.getElementById('paper').onclick = user;
+document.getElementById('scissors').onclick = user;
+var yourScore = 0
+var cpuScore = 0
+var draw = 0
+var result
+function user(){
+var userChoice = this.id;
+
+var computerChoice = Math.random();
+     if (computerChoice < 0.34) {
+         computerChoice = "rock";
+      }else if(computerChoice <= 0.67) {
+         computerChoice = "paper";
+      }else{
+         computerChoice = "scissors";
+      }; 
+      compare(userChoice,computerChoice)    
+ document.querySelector('.disp').innerHTML = "User: " + userChoice + " vs " + "Computer: " + computerChoice
+function compare(choice1, choice2) {
+
+    if (choice1 === choice2) {
+        draw++
+        document.querySelector('.ts3').innerHTML = draw
+       
+        
     }
-    function cancel(){
-        document.querySelector('.pro').style.opacity= '-1'
+
+    if (choice1 === "rock") {
+        if (choice2 === "scissors") {
+            yourScore++
+            document.querySelector('.ts2').innerHTML = yourScore
+            
+        }else{
+            cpuScore++
+            document.querySelector('.ts1').innerHTML = cpuScore
+           
+        }
+            }
+
+     if (choice1 === "paper") {
+         if (choice2 === "rock") {
+            yourScore++
+            document.querySelector('.ts2').innerHTML = yourScore
+            
+          } else {
+            cpuScore++
+            document.querySelector('.ts1').innerHTML = cpuScore
+           
+          }
+         }
+    
+         if (choice1 === "scissors") {
+         if (choice2 === "rock") {
+            cpuScore++
+            document.querySelector('.ts1').innerHTML = cpuScore
+           
+         } else {
+            yourScore++
+            document.querySelector('.ts2').innerHTML = yourScore
+           
+        }
     }
+}
+}
 </script>
 </body>
 </html>

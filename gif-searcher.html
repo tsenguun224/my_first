@@ -147,16 +147,13 @@
 		</div>
 
 		<div class="ms-section five">
-            <h1><a href="#" id="project">Projects</a></h1>
-            <div class="pro">
-                <a href="./calculator.html">calculator</a>
-                <a href="./math-game.html">math-game</a>
-                <a href="./daalgawar5.html">rock paper</a>
-                <a href="./function.html">palindrome</a>
-                <a href="./gif-searcher.html">gif searcher</a>
-                <a href="./random.html">random gif</a>
-                <button onclick="cancel()">X</button>
-            </div>
+            <h1><a href="#" id="project">Gif seacher</a></h1>
+                <form id="gif-form">
+                    <input type="text" class="search">
+                    <input type="submit" value="search">
+                </form>    
+                <div class="results"></div>
+            
 		</div>
 
 		<div class="ms-section six">
@@ -168,13 +165,32 @@
 	</div>
 </div>
 <script>
-    var project = document.getElementById('project')
-    project.onclick = function(){ 
-        document.querySelector('.pro').style.opacity = '1'
+    const gifForm = document.querySelector("#gif-form");
+    gifForm.addEventListener("submit", fetchGiphs);
+
+    function fetchGiphs(e) {
+        e.preventDefault();
+        const searchTerm = document.querySelector(".search").value;
+        fetch(`https://api.giphy.com/v1/gifs/search?&q=${searchTerm}&limit=10&api_key=3mIxmBZUIIPyb8R69gtxaW8Hsh74dFKV`)
+        .then((response) => {return response.json(); })
+        .then((resp => {
+            let dataArray = resp.data
+            showGiphs(dataArray);
+        }))
+        .catch(err => console.log(err));
     }
-    function cancel(){
-        document.querySelector('.pro').style.opacity= '-1'
+
+    function showGiphs(dataArray) {
+    const results = document.querySelector(".results");
+    let output = '<div class="container">';
+    dataArray.forEach((imgData) => {
+        output += `
+    <img src="${imgData.images.fixed_width.url}"/>
+    `;
+    });
+    document.querySelector('.results').innerHTML = output;
     }
+    
 </script>
 </body>
 </html>
